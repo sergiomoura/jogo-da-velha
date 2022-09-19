@@ -1,0 +1,31 @@
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#tabuleiro {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 420px;
+    height: 420px;
+    gap: 6px;
+    background-color: #666666;
+}
+
+#tabuleiro button{
+    border: none;
+    width: 136px;
+    height: 136px;
+    font-size: 70px;
+}
+
+
+

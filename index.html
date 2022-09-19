@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo da Velha</title>
+    <style>
+        main {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            width: 420px;
+            height: 420px;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <button id="a1"></button>
+        <button id="a2"></button>
+        <button id="a3"></button>
+        <button id="b1"></button>
+        <button id="b2"></button>
+        <button id="b3"></button>
+        <button id="c1"></button>
+        <button id="c2"></button>
+        <button id="c3"></button>
+    </main>
+    <script>
+        
+        const buttons = document.getElementsByTagName("button");
+        
+        let jogadorDaVez = "X";
+
+        for(let button of buttons){
+            button.addEventListener(
+                'click',
+                evt => {
+                    marcar(evt.target.id);
+                }
+            )
+        }
+
+        function marcar(posicao){
+
+            if(document.getElementById(posicao).innerHTML == ""){
+                
+                // Marca a casinha com o nome do jogador da vez
+                document.getElementById(posicao).innerHTML = jogadorDaVez;
+                
+                // Troca o jogador da vez
+                jogadorDaVez = jogadorDaVez=="X" ? "O" : "X";
+                
+                checaVitoria();
+
+                numeroDeJogadas++;
+            }
+
+        }
+
+        function checaVitoria(){
+            let b1 = document.getElementById("a1");
+            let b2 = document.getElementById("b2");
+            let b3 = document.getElementById("c3");
+
+            if(
+                b1.innerHTML == b2.innerHTML &&
+                b1.innerHTML == b3.innerHTML &&
+                b1.innerHTML != ""
+                ){
+                    alert(`Jogador ${b1.innerHTML} venceu!!!`);
+                }
+
+        }
+
+        function checaTresBotoes(b1, b2, b3){
+            if(b1.innerHTML == b2.innerHTML && b1.innerHTML == b3.innerHTML){
+                return b1.innerHTML;
+            } else {
+                return undefined;
+            }
+        }
+
+        function checaLinha(linha){
+            
+            let b1 = document.getElementById(linha + 1);
+            let b2 = document.getElementById(linha + 2);
+            let b3 = document.getElementById(linha + 3);
+            
+            return checaTresBotoes(b1, b2, b3)
+
+        }
+
+        function checaColuna(coluna){
+            
+            let b1 = document.getElementById("a" + coluna);
+            let b2 = document.getElementById("b" + coluna);
+            let b3 = document.getElementById("c" + coluna);
+            
+            return checaTresBotoes(b1, b2, b3)
+
+        }
+
+        function checaDiagonaisDireita(){
+
+            let b1 = document.getElementById("a1");
+            let b2 = document.getElementById("b2");
+            let b3 = document.getElementById("c3");
+            
+            return checaTresBotoes(b1, b2, b3)
+            
+        }
+
+        function checaDiagonaisEsquerda(){
+            let b1 = document.getElementById("a3");
+            let b2 = document.getElementById("b2");
+            let b3 = document.getElementById("c1");
+            
+            return checaTresBotoes(b1, b2, b3)
+            
+        }
+
+    </script>
+</body>
+</html>
